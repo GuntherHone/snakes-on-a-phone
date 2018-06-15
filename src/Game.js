@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Game.css';
+import Swiper from './Swiper';
 
 const WIDTH = 9 * 4;
 const HEIGHT = 16 * 4;
@@ -14,60 +15,31 @@ class Game extends Component {
         score: 0
     }
 
-    touchStartX = 0
-    touchStartY = 0
-    touchCurrX = 0
-    touchCurrY = 0
-
-    touchStart = event => {
-        let { clientX, clientY } = event.touches[0];
-        this.touchStartX = clientX;
-        this.touchStartY = clientY;
-    }
-
-    touchMove = event => {
-        let { clientX, clientY } = event.touches[0];
-        this.touchCurrX = clientX;
-        this.touchCurrY = clientY;
-    }
-
-    touchEnd = event => {
-        let deltaX = this.touchCurrX - this.touchStartX
-        let deltaY = this.touchCurrY - this.touchStartY
-
-        let newState = 'none'
-
-        if (Math.abs(deltaX) > Math.abs(deltaY)) {
-            newState = deltaX < 0 ? 'left' : 'right'
-        } else {
-            newState = deltaY < 0 ? 'up' : 'down'
-        }
-
-        switch (newState) {
+    swipe = swipeDirection => {
+        switch (swipeDirection) {
             case 'up':
                 if (this.state.direction !== 'down') {
-                    this.setState({ direction: newState })
+                    this.setState({ direction: swipeDirection })
                 }
                 break;
             case 'down':
                 if (this.state.direction !== 'up') {
-                    this.setState({ direction: newState })
+                    this.setState({ direction: swipeDirection })
                 }
                 break;
             case 'left':
                 if (this.state.direction !== 'right') {
-                    this.setState({ direction: newState })
+                    this.setState({ direction: swipeDirection })
                 }
                 break;
             case 'right':
                 if (this.state.direction !== 'left') {
-                    this.setState({ direction: newState })
+                    this.setState({ direction: swipeDirection })
                 }
                 break;
             default:
                 break;
         }
-
     }
 
     componentDidMount() {
@@ -132,12 +104,11 @@ class Game extends Component {
         let rows = Array(HEIGHT).fill(Array(WIDTH).fill(0))
 
         return (
-            <div className="Game" onTouchStart={this.touchStart}
-                onTouchMove={this.touchMove} onTouchEnd={this.touchEnd}>
+            <Swiper className="Game" swipe={this.swipe}>
                 <h2>{`Score: ${this.state.score}`}</h2>
                 {rows.map((row, y) => <div className="row">{row.map((cell, x) => <div className={"block" + this.getBlockColor(x, y)} />)}</div>)}
                 {this.props.debug && <pre>{JSON.stringify(this.state, null, 2)}</pre>}
-            </div>
+            </Swiper>
         )
     }
 }
