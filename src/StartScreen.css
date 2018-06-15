@@ -1,0 +1,15 @@
+.StartScreen {
+  width:100vw;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction: column;
+}
+
+.StartScreen button {
+  font-size:24px;
+  background-color:teal;
+  color:white;
+  border-radius:10px;
+}
