@@ -78,7 +78,7 @@ class Game extends Component {
                 do {
                     newState.foodX = Math.floor(Math.random() * WIDTH)
                     newState.foodY = Math.floor(Math.random() * HEIGHT)
-                } while (!this.isSnake(newState.foodX, newState.foodY))
+                } while (this.isSnake(newState.foodX, newState.foodY))
                 newState.score++
             }
 
