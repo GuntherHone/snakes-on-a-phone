@@ -7,8 +7,10 @@ const HEIGHT = 16 * 4;
 
 class Game extends Component {
     state = {
-        x: Math.floor(Math.random() * WIDTH),
-        y: Math.floor(Math.random() * HEIGHT),
+        snake: [{
+            x: Math.floor(Math.random() * WIDTH),
+            y: Math.floor(Math.random() * HEIGHT)
+        }],
         direction: 'up',
         foodX: Math.floor(Math.random() * WIDTH),
         foodY: Math.floor(Math.random() * HEIGHT),
@@ -45,43 +47,38 @@ class Game extends Component {
     componentDidMount() {
         setInterval(() => {
             let newState = { ...this.state }
+            let head = Object.assign({}, this.state.snake[0])
 
             switch (this.state.direction) {
                 case "up":
-                    if (this.state.y === 0) {
-                        newState.y = HEIGHT - 1
-                    } else {
-                        newState.y = this.state.y - 1
-                    }
+                    head.y = ((head.y - 1) + HEIGHT) % HEIGHT;
                     break;
                 case "right":
-                    if (this.state.x === WIDTH - 1) {
-                        newState.x = 0
-                    } else {
-                        newState.x = this.state.x + 1
-                    }
+                    head.x = (head.x + 1) % WIDTH;
                     break;
                 case "down":
-                    if (this.state.y === HEIGHT - 1) {
-                        newState.y = 0
-                    } else {
-                        newState.y = this.state.y + 1
-                    }
+                    head.y = (head.y + 1) % HEIGHT;
                     break;
                 case "left":
-                    if (this.state.x === 0) {
-                        newState.x = WIDTH - 1
-                    } else {
-                        newState.x = this.state.x - 1
-                    }
+                    head.x = ((head.x - 1) + WIDTH) % WIDTH
                     break;
                 default:
                     break;
             }
 
-            if ((newState.x === newState.foodX) && (newState.y === newState.foodY)) {
-                newState.foodX = Math.floor(Math.random() * WIDTH)
-                newState.foodY = Math.floor(Math.random() * HEIGHT)
+            let newFood = false
+            if ((head.x === newState.foodX) && (head.y === newState.foodY)) {
+                newFood = true
+                newState.snake = [head, ...newState.snake]
+            } else {
+                newState.snake = [head, ...newState.snake.slice(0, newState.snake.length - 1)]
+            }
+
+            if (newFood) {
+                do {
+                    newState.foodX = Math.floor(Math.random() * WIDTH)
+                    newState.foodY = Math.floor(Math.random() * HEIGHT)
+                } while (!this.isSnake(newState.foodX, newState.foodY))
                 newState.score++
             }
 
@@ -90,8 +87,10 @@ class Game extends Component {
         }, this.props.interval)
     }
 
+    isSnake = (x, y) => this.state.snake.find(point => (point.x === x) && (point.y === y))
+
     getBlockColor = (x, y) => {
-        if ((x === this.state.x) && (y === this.state.y)) {
+        if (this.isSnake(x, y)) {
             return " snake";
         } else if ((x === this.state.foodX) && (y === this.state.foodY)) {
             return " food";

@@ -14,7 +14,7 @@ class App extends Component {
       case "start":
         return <StartScreen startGame={this.startGame} />
       case "game":
-        return <Game interval={200} debug={true}/>
+        return <Game interval={200} debug={false}/>
     }
   }
 }
