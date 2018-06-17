@@ -1,5 +1,5 @@
-import React from 'react';
-import './StartScreen.css';
+import React from "react";
+import "./StartScreen.css";
 
 const StartScreen = ({ startGame, highScore }) => (
   <div className="StartScreen">
@@ -7,6 +7,6 @@ const StartScreen = ({ startGame, highScore }) => (
     <p>High Score: {highScore}</p>
     <button onClick={startGame}>Start</button>
   </div>
-)
+);
 
 export default StartScreen;
