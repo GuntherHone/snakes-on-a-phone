@@ -14,8 +14,10 @@ class Game extends Component {
         direction: 'up',
         foodX: Math.floor(Math.random() * WIDTH),
         foodY: Math.floor(Math.random() * HEIGHT),
-        score: 0
+        score: 0,
+        gameState: 'running'
     }
+    timer = null
 
     swipe = swipeDirection => {
         switch (swipeDirection) {
@@ -45,7 +47,7 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        setInterval(() => {
+        this.timer = setInterval(() => {
             let newState = { ...this.state }
             let head = Object.assign({}, this.state.snake[0])
 
@@ -64,6 +66,12 @@ class Game extends Component {
                     break;
                 default:
                     break;
+            }
+
+            if (this.isSnake(head.x, head.y)) {
+                clearInterval(this.timer)
+                this.setState({ gameState: 'gameover' })
+                return;
             }
 
             let newFood = false
@@ -99,14 +107,19 @@ class Game extends Component {
         }
     }
 
+    returnToStart = () => {
+        this.props.gameover(this.state.score)
+    }
+
     render() {
         let rows = Array(HEIGHT).fill(Array(WIDTH).fill(0))
 
         return (
             <Swiper className="Game" swipe={this.swipe}>
-                <h2>{`Score: ${this.state.score}`}</h2>
+                <h2 className="heading">{`Score: ${this.state.score}`}</h2>
                 {rows.map((row, y) => <div className="row">{row.map((cell, x) => <div className={"block" + this.getBlockColor(x, y)} />)}</div>)}
                 {this.props.debug && <pre>{JSON.stringify(this.state, null, 2)}</pre>}
+                {(this.state.gameState === 'gameover') && <h1 className="overlay" onClick={this.returnToStart}>Game over</h1>}
             </Swiper>
         )
     }
