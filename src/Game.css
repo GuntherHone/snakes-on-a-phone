@@ -24,17 +24,18 @@
 .Game .heading {
   margin:0;
   padding:10px;
-  box-shadow: 0 5px 5px 5px grey;
+  box-shadow: 0 5px 5px 5px #ccc;
 }
 
 .Game .overlay {
+  display:flex;
   position:fixed;
   top:0;
   left:0;
   width:100vw;
   height:100vh;
   z-index: 2;
-  background-color: rgba(255,255,255,0.5);
-  text-align: center;
-  line-height: 100vh;
+  background-color: rgba(255,255,255,0.75);
+  align-items: center;
+  justify-content: center;
 }
