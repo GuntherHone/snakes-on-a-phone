@@ -1,0 +1,44 @@
+.Game {
+  height:100vh;
+  width:100vw;
+  display:flex;
+  flex-direction:column;
+}
+.Game .row {
+  width:100vw;
+  display:flex;
+  flex-direction:row;
+  justify-content:space-between;
+  flex:1;
+}
+.Game .block {
+  display:inline-block;
+  flex:1;
+}
+.Game .snake {
+  background-color:#0c0;
+}
+.Game .food {
+  background-color:red;
+  border-radius: 50%;
+}
+.Game .heading {
+  margin:0;
+  padding:10px;
+  background-color: #333;
+}
+
+.Game .overlay {
+  display:flex;
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100vw;
+  height:100vh;
+  z-index: 2;
+  background-color: rgba(63,63,63,0.75);
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  margin:0;
+}
