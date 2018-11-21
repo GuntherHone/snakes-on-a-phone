@@ -16,15 +16,16 @@
   flex:1;
 }
 .Game .snake {
-  background-color:black;
+  background-color:#0c0;
 }
 .Game .food {
   background-color:red;
+  border-radius: 50%;
 }
 .Game .heading {
   margin:0;
   padding:10px;
-  box-shadow: 0 5px 5px 5px #ccc;
+  background-color: #333;
 }
 
 .Game .overlay {
