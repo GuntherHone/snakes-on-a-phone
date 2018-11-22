@@ -5,6 +5,12 @@ import Swiper from "./Swiper";
 const WIDTH = 9 * 4;
 const HEIGHT = 16 * 4;
 
+const Heading = ({ score }) => (
+  <div className="heading">
+    <p>Score: {score}</p>
+  </div>
+);
+
 class Game extends Component {
   state = {
     snake: [
@@ -123,7 +129,7 @@ class Game extends Component {
 
     return (
       <Swiper className="Game" swipe={this.swipe}>
-        <h2 className="heading">{`Score: ${this.state.score}`}</h2>
+        <Heading score={this.state.score} />
         {rows.map((row, y) => (
           <div className="row">
             {row.map((cell, x) => (
