@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/snakes-on-a-phone/static/js/runtime~main.edc9ccc9.js"
   },
   {
-    "revision": "acd52074fefb53c16eb7",
-    "url": "/snakes-on-a-phone/static/js/main.acd52074.chunk.js"
+    "revision": "082b984e109c542364ee",
+    "url": "/snakes-on-a-phone/static/js/main.082b984e.chunk.js"
   },
   {
     "revision": "879ac4934f3f446586e7",
     "url": "/snakes-on-a-phone/static/js/1.879ac493.chunk.js"
   },
   {
-    "revision": "acd52074fefb53c16eb7",
-    "url": "/snakes-on-a-phone/static/css/main.f56a5f8d.chunk.css"
+    "revision": "082b984e109c542364ee",
+    "url": "/snakes-on-a-phone/static/css/main.1824823a.chunk.css"
   },
   {
-    "revision": "f709ffc44e1ac4fc4fcddd265637066f",
+    "revision": "67c7c6ba0cdaf7addfe1f332c532637c",
     "url": "/snakes-on-a-phone/index.html"
   }
 ];

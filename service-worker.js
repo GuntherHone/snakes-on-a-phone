@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/snakes-on-a-phone/precache-manifest.e9c95602c6839a67fa0be1b481f520ae.js"
+  "/snakes-on-a-phone/precache-manifest.ae562c119591d406e8748f61ecd820ab.js"
 );
 
 workbox.clientsClaim();
